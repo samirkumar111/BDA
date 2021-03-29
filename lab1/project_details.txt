@@ -1,0 +1,17 @@
+use students;
+
+create table ProjectDetails ( projectId int, projectName text, studentname text, rating double, duration int, primary key(projectid,projectname));
+
+Begin Batch 
+insert into projectdetails (projectid, projectname, studetname, rating, duration) 
+	values (1,'MS Data Migration','David Sheen',3.5,720) 
+	
+insert into projectdetails (projectid, projectname, studentname, rating, duration) 
+	values (1,'MS Data Warehouse','David Sheen',3.9,1440) 
+	
+insert into projectdetails (projectid, projectname, studentname, rating, duration)
+	values (2,'SAP Reporting','Stephen Fox',4.2,3000) 
+	
+insert into projectdetails (projectid, projectname, studentname, rating, duration) 
+	values (2,'SAP BI DW','Stephen Fox',4,9000) 
+Apply batch ;
