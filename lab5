@@ -1,0 +1,1697 @@
+samir@samir-VivoBook-ASUSLaptop-X430FA-S430FA:~$ su - hadoopusr
+Password: 
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:~$ hdfs dfs -mkdir -p /usr/local/hadoop/input
+2021-04-24 11:47:00,993 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:~$ cd /usr/local/hadoop
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ ls
+bin      input    LICENSE-binary   logs             NOTICE.txt  share
+etc      lib      licenses-binary  mapred-site.xml  README.txt  wordcount.jar
+include  libexec  LICENSE.txt      NOTICE-binary    sbin
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ hdfs dfs -put LICENSE.txt /usr/local/hadoop/input/
+2021-04-24 11:47:44,403 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ jps
+2753 DataNode
+3201 ResourceManager
+2997 SecondaryNameNode
+3351 NodeManager
+5706 Jps
+2605 NameNode
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ cd $HADOOP_HOME
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.0.jar wordcount input output
+2021-04-24 11:48:39,332 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2021-04-24 11:48:39,773 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at /0.0.0.0:8032
+2021-04-24 11:48:40,041 INFO mapreduce.JobResourceUploader: Disabling Erasure Coding for path: /tmp/hadoop-yarn/staging/hadoopusr/.staging/job_1619243112767_0004
+2021-04-24 11:48:40,206 INFO mapreduce.JobSubmitter: Cleaning up the staging area /tmp/hadoop-yarn/staging/hadoopusr/.staging/job_1619243112767_0004
+org.apache.hadoop.mapreduce.lib.input.InvalidInputException: Input path does not exist: hdfs://localhost:9000/user/hadoopusr/input
+	at org.apache.hadoop.mapreduce.lib.input.FileInputFormat.singleThreadedListStatus(FileInputFormat.java:340)
+	at org.apache.hadoop.mapreduce.lib.input.FileInputFormat.listStatus(FileInputFormat.java:279)
+	at org.apache.hadoop.mapreduce.lib.input.FileInputFormat.getSplits(FileInputFormat.java:404)
+	at org.apache.hadoop.mapreduce.JobSubmitter.writeNewSplits(JobSubmitter.java:310)
+	at org.apache.hadoop.mapreduce.JobSubmitter.writeSplits(JobSubmitter.java:327)
+	at org.apache.hadoop.mapreduce.JobSubmitter.submitJobInternal(JobSubmitter.java:200)
+	at org.apache.hadoop.mapreduce.Job$11.run(Job.java:1576)
+	at org.apache.hadoop.mapreduce.Job$11.run(Job.java:1573)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAs(Subject.java:422)
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1845)
+	at org.apache.hadoop.mapreduce.Job.submit(Job.java:1573)
+	at org.apache.hadoop.mapreduce.Job.waitForCompletion(Job.java:1594)
+	at org.apache.hadoop.examples.WordCount.main(WordCount.java:87)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.hadoop.util.ProgramDriver$ProgramDescription.invoke(ProgramDriver.java:71)
+	at org.apache.hadoop.util.ProgramDriver.run(ProgramDriver.java:144)
+	at org.apache.hadoop.examples.ExampleDriver.main(ExampleDriver.java:74)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.hadoop.util.RunJar.run(RunJar.java:323)
+	at org.apache.hadoop.util.RunJar.main(RunJar.java:236)
+Caused by: java.io.IOException: Input path does not exist: hdfs://localhost:9000/user/hadoopusr/input
+	at org.apache.hadoop.mapreduce.lib.input.FileInputFormat.singleThreadedListStatus(FileInputFormat.java:313)
+	... 26 more
+hadoopusr@amber-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ hdfs dfs -ls
+2021-04-24 11:50:00,141 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ cd input
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop/input$ ls
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop/input$ ls input
+ls: cannot access 'input': No such file or directory
+hadoopusr@amber-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop/input$ cat LICENSE.txt
+cat: LICENSE.txt: No such file or directory
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop/input$ cd ..
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ cd ..
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local$ cd ..
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr$ cd ..
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/$ cd hadoopsr
+-bash: cd: hadoopsr: No such file or directory
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/$ cd hadoopusr
+-bash: cd: hadoopusr: No such file or directory
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/$ ls
+bin   cdrom  dev  home  lib32  libx32      media  opt   root  sbin  srv       sys  usr
+boot  data   etc  lib   lib64  lost+found  mnt    proc  run   snap  swapfile  tmp  var
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/$ cd usr
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr$ ls
+bin  games  include  lib  lib32  lib64  libexec  libx32  local  sbin  share  src
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr$ cd local
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local$ ls
+apache-hive-3.1.2-bin   etc     hadoop_space  lib         sbin
+bin                     games   hadoop_tmp    man         share
+db-derby-10.13.1.1-bin  hadoop  include       pig-0.17.0  src
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local$ cd hadoop
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ ls
+bin      input    LICENSE-binary   logs             NOTICE.txt  share
+etc      lib      licenses-binary  mapred-site.xml  README.txt  wordcount.jar
+include  libexec  LICENSE.txt      NOTICE-binary    sbin
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ ls input
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ hdfs dfs -put LICENSE.txt input/
+2021-04-24 11:55:31,985 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+put: `input/': No such file or directory: `hdfs://localhost:9000/user/hadoopusr/input'
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ hdfs dfs -put LICENSE.txt input
+2021-04-24 11:55:37,235 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.0.jar wordcount input output
+2021-04-24 11:56:20,366 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2021-04-24 11:56:20,803 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at /0.0.0.0:8032
+2021-04-24 11:56:21,059 INFO mapreduce.JobResourceUploader: Disabling Erasure Coding for path: /tmp/hadoop-yarn/staging/hadoopusr/.staging/job_1619243112767_0005
+2021-04-24 11:56:21,222 INFO input.FileInputFormat: Total input files to process : 1
+2021-04-24 11:56:21,712 INFO mapreduce.JobSubmitter: number of splits:1
+2021-04-24 11:56:21,852 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1619243112767_0005
+2021-04-24 11:56:21,852 INFO mapreduce.JobSubmitter: Executing with tokens: []
+2021-04-24 11:56:21,986 INFO conf.Configuration: resource-types.xml not found
+2021-04-24 11:56:21,987 INFO resource.ResourceUtils: Unable to find 'resource-types.xml'.
+2021-04-24 11:56:22,374 INFO impl.YarnClientImpl: Submitted application application_1619243112767_0005
+2021-04-24 11:56:22,406 INFO mapreduce.Job: The url to track the job: http://amber-VivoBook-ASUSLaptop-X430FA-S430FA:8088/proxy/application_1619243112767_0005/
+2021-04-24 11:56:22,407 INFO mapreduce.Job: Running job: job_1619243112767_0005
+2021-04-24 11:56:26,459 INFO mapreduce.Job: Job job_1619243112767_0005 running in uber mode : false
+2021-04-24 11:56:26,462 INFO mapreduce.Job:  map 0% reduce 0%
+2021-04-24 11:56:26,493 INFO mapreduce.Job: Job job_1619243112767_0005 failed with state FAILED due to: Application application_1619243112767_0005 failed 2 times due to AM Container for appattempt_1619243112767_0005_000002 exited with  exitCode: 1
+Failing this attempt.Diagnostics: [2021-04-24 11:56:25.556]Exception from container-launch.
+Container id: container_1619243112767_0005_02_000001
+Exit code: 1
+
+[2021-04-24 11:56:25.565]Container exited with a non-zero exit code 1. Error file: prelaunch.err.
+Last 4096 bytes of prelaunch.err :
+Last 4096 bytes of stderr :
+Error: Could not find or load main class org.apache.hadoop.mapreduce.v2.app.MRAppMaster
+
+Please check whether your <HADOOP_HOME>/etc/hadoop/mapred-site.xml contains the below configuration:
+<property>
+  <name>yarn.app.mapreduce.am.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+<property>
+  <name>mapreduce.map.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+<property>
+  <name>mapreduce.reduce.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+
+[2021-04-24 11:56:25.566]Container exited with a non-zero exit code 1. Error file: prelaunch.err.
+Last 4096 bytes of prelaunch.err :
+Last 4096 bytes of stderr :
+Error: Could not find or load main class org.apache.hadoop.mapreduce.v2.app.MRAppMaster
+
+Please check whether your <HADOOP_HOME>/etc/hadoop/mapred-site.xml contains the below configuration:
+<property>
+  <name>yarn.app.mapreduce.am.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+<property>
+  <name>mapreduce.map.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+<property>
+  <name>mapreduce.reduce.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+
+For more detailed output, check the application tracking page: http://amber-VivoBook-ASUSLaptop-X430FA-S430FA:8088/cluster/app/application_1619243112767_0005 Then click on links to logs of each attempt.
+. Failing the application.
+2021-04-24 11:56:26,514 INFO mapreduce.Job: Counters: 0
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ touch test.txt
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ sudo nano test.txt
+[sudo] password for hadoopusr: 
+Sorry, try again.
+[sudo] password for hadoopusr: 
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ hdfs dfs -put test.txt input
+2021-04-24 11:59:52,538 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+put: `input': File exists
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.0.jar wordcount input output
+2021-04-24 12:00:29,015 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2021-04-24 12:00:29,449 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at /0.0.0.0:8032
+2021-04-24 12:00:29,707 INFO mapreduce.JobResourceUploader: Disabling Erasure Coding for path: /tmp/hadoop-yarn/staging/hadoopusr/.staging/job_1619243112767_0006
+2021-04-24 12:00:29,858 INFO input.FileInputFormat: Total input files to process : 1
+2021-04-24 12:00:29,903 INFO mapreduce.JobSubmitter: number of splits:1
+2021-04-24 12:00:30,008 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1619243112767_0006
+2021-04-24 12:00:30,008 INFO mapreduce.JobSubmitter: Executing with tokens: []
+2021-04-24 12:00:30,149 INFO conf.Configuration: resource-types.xml not found
+2021-04-24 12:00:30,149 INFO resource.ResourceUtils: Unable to find 'resource-types.xml'.
+2021-04-24 12:00:30,207 INFO impl.YarnClientImpl: Submitted application application_1619243112767_0006
+2021-04-24 12:00:30,238 INFO mapreduce.Job: The url to track the job: http://amber-VivoBook-ASUSLaptop-X430FA-S430FA:8088/proxy/application_1619243112767_0006/
+2021-04-24 12:00:30,238 INFO mapreduce.Job: Running job: job_1619243112767_0006
+2021-04-24 12:00:33,277 INFO mapreduce.Job: Job job_1619243112767_0006 running in uber mode : false
+2021-04-24 12:00:33,278 INFO mapreduce.Job:  map 0% reduce 0%
+2021-04-24 12:00:33,296 INFO mapreduce.Job: Job job_1619243112767_0006 failed with state FAILED due to: Application application_1619243112767_0006 failed 2 times due to AM Container for appattempt_1619243112767_0006_000002 exited with  exitCode: 1
+Failing this attempt.Diagnostics: [2021-04-24 12:00:32.775]Exception from container-launch.
+Container id: container_1619243112767_0006_02_000001
+Exit code: 1
+
+[2021-04-24 12:00:32.777]Container exited with a non-zero exit code 1. Error file: prelaunch.err.
+Last 4096 bytes of prelaunch.err :
+Last 4096 bytes of stderr :
+Error: Could not find or load main class org.apache.hadoop.mapreduce.v2.app.MRAppMaster
+
+Please check whether your <HADOOP_HOME>/etc/hadoop/mapred-site.xml contains the below configuration:
+<property>
+  <name>yarn.app.mapreduce.am.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+<property>
+  <name>mapreduce.map.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+<property>
+  <name>mapreduce.reduce.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+
+[2021-04-24 12:00:32.777]Container exited with a non-zero exit code 1. Error file: prelaunch.err.
+Last 4096 bytes of prelaunch.err :
+Last 4096 bytes of stderr :
+Error: Could not find or load main class org.apache.hadoop.mapreduce.v2.app.MRAppMaster
+
+Please check whether your <HADOOP_HOME>/etc/hadoop/mapred-site.xml contains the below configuration:
+<property>
+  <name>yarn.app.mapreduce.am.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+<property>
+  <name>mapreduce.map.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+<property>
+  <name>mapreduce.reduce.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+
+For more detailed output, check the application tracking page: http://amber-VivoBook-ASUSLaptop-X430FA-S430FA:8088/cluster/app/application_1619243112767_0006 Then click on links to logs of each attempt.
+. Failing the application.
+2021-04-24 12:00:33,323 INFO mapreduce.Job: Counters: 0
+hadoopusr@amber-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ ls
+bin      input    LICENSE-binary   logs             NOTICE.txt  share
+etc      lib      licenses-binary  mapred-site.xml  README.txt  test.txt
+include  libexec  LICENSE.txt      NOTICE-binary    sbin        wordcount.jar
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ cd etc
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop/etc$ ls
+hadoop
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop/etc$ cd hadoop
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop/etc/hadoop$ ls
+capacity-scheduler.xml            httpfs-env.sh               mapred-site.xml
+configuration.xsl                 httpfs-log4j.properties     shellprofile.d
+container-executor.cfg            httpfs-site.xml             ssl-client.xml.example
+core-site.xml                     kms-acls.xml                ssl-server.xml.example
+hadoop-env.cmd                    kms-env.sh                  user_ec_policies.xml.template
+hadoop-env.sh                     kms-log4j.properties        workers
+hadoop-metrics2.properties        kms-site.xml                yarn-env.cmd
+hadoop-policy.xml                 log4j.properties            yarn-env.sh
+hadoop-user-functions.sh.example  mapred-env.cmd              yarnservice-log4j.properties
+hdfs-rbf-site.xml                 mapred-env.sh               yarn-site.xml
+hdfs-site.xml                     mapred-queues.xml.template
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop/etc/hadoop$ cat mapred-site.xml
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+-->
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+<property>
+<name>mapreduce.framework.name</name>
+<value>yarn</value>
+</property>
+</configuration>
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop/etc/hadoop$ sudo nano mapred-site.xml
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop/etc/hadoop$ sudo nano yarn-site.xml
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop/etc/hadoop$ hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.0.jar wordcount input output
+JAR does not exist or is not a normal file: /usr/local/hadoop/etc/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.0.jar
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop/etc/hadoop$ cd ..
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop/etc$ cd ..
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.0.jar wordcount input output
+2021-04-24 12:08:38,558 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2021-04-24 12:08:39,002 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at /0.0.0.0:8032
+2021-04-24 12:08:39,259 INFO mapreduce.JobResourceUploader: Disabling Erasure Coding for path: /tmp/hadoop-yarn/staging/hadoopusr/.staging/job_1619243112767_0007
+2021-04-24 12:08:39,415 INFO input.FileInputFormat: Total input files to process : 1
+2021-04-24 12:08:39,458 INFO mapreduce.JobSubmitter: number of splits:1
+2021-04-24 12:08:39,549 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1619243112767_0007
+2021-04-24 12:08:39,549 INFO mapreduce.JobSubmitter: Executing with tokens: []
+2021-04-24 12:08:39,681 INFO conf.Configuration: resource-types.xml not found
+2021-04-24 12:08:39,681 INFO resource.ResourceUtils: Unable to find 'resource-types.xml'.
+2021-04-24 12:08:39,737 INFO impl.YarnClientImpl: Submitted application application_1619243112767_0007
+2021-04-24 12:08:39,766 INFO mapreduce.Job: The url to track the job: http://amber-VivoBook-ASUSLaptop-X430FA-S430FA:8088/proxy/application_1619243112767_0007/
+2021-04-24 12:08:39,767 INFO mapreduce.Job: Running job: job_1619243112767_0007
+2021-04-24 12:08:41,806 INFO mapreduce.Job: Job job_1619243112767_0007 running in uber mode : false
+2021-04-24 12:08:41,810 INFO mapreduce.Job:  map 0% reduce 0%
+2021-04-24 12:08:41,838 INFO mapreduce.Job: Job job_1619243112767_0007 failed with state FAILED due to: Application application_1619243112767_0007 failed 2 times due to AM Container for appattempt_1619243112767_0007_000002 exited with  exitCode: 1
+Failing this attempt.Diagnostics: [2021-04-24 12:08:41.425]Exception from container-launch.
+Container id: container_1619243112767_0007_02_000001
+Exit code: 1
+
+[2021-04-24 12:08:41.431]Container exited with a non-zero exit code 1. Error file: prelaunch.err.
+Last 4096 bytes of prelaunch.err :
+Last 4096 bytes of stderr :
+Error: Could not find or load main class org.apache.hadoop.mapreduce.v2.app.MRAppMaster
+
+Please check whether your <HADOOP_HOME>/etc/hadoop/mapred-site.xml contains the below configuration:
+<property>
+  <name>yarn.app.mapreduce.am.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+<property>
+  <name>mapreduce.map.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+<property>
+  <name>mapreduce.reduce.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+
+[2021-04-24 12:08:41.432]Container exited with a non-zero exit code 1. Error file: prelaunch.err.
+Last 4096 bytes of prelaunch.err :
+Last 4096 bytes of stderr :
+Error: Could not find or load main class org.apache.hadoop.mapreduce.v2.app.MRAppMaster
+
+Please check whether your <HADOOP_HOME>/etc/hadoop/mapred-site.xml contains the below configuration:
+<property>
+  <name>yarn.app.mapreduce.am.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+<property>
+  <name>mapreduce.map.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+<property>
+  <name>mapreduce.reduce.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+
+For more detailed output, check the application tracking page: http://amber-VivoBook-ASUSLaptop-X430FA-S430FA:8088/cluster/app/application_1619243112767_0007 Then click on links to logs of each attempt.
+. Failing the application.
+2021-04-24 12:08:41,859 INFO mapreduce.Job: Counters: 0
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ cd etc
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop/etc$ ls
+hadoop
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop/etc$ cd hadoop
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop/etc/hadoop$ sudo nano mapred-site.xml
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop/etc/hadoop$ cd ..
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop/etc$ cd ..
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.0.jar wordcount input output
+2021-04-24 12:13:13,937 ERROR conf.Configuration: error parsing conf mapred-site.xml
+com.ctc.wstx.exc.WstxParsingException: Illegal to have multiple roots (start tag in epilog?).
+ at [row,col,system-id]: [26,2,"file:/usr/local/hadoop/etc/hadoop/mapred-site.xml"]
+	at com.ctc.wstx.sr.StreamScanner.constructWfcException(StreamScanner.java:621)
+	at com.ctc.wstx.sr.StreamScanner.throwParseError(StreamScanner.java:491)
+	at com.ctc.wstx.sr.StreamScanner.throwParseError(StreamScanner.java:475)
+	at com.ctc.wstx.sr.BasicStreamReader.handleExtraRoot(BasicStreamReader.java:2242)
+	at com.ctc.wstx.sr.BasicStreamReader.nextFromProlog(BasicStreamReader.java:2156)
+	at com.ctc.wstx.sr.BasicStreamReader.closeContentTree(BasicStreamReader.java:2991)
+	at com.ctc.wstx.sr.BasicStreamReader.nextFromTree(BasicStreamReader.java:2734)
+	at com.ctc.wstx.sr.BasicStreamReader.next(BasicStreamReader.java:1123)
+	at org.apache.hadoop.conf.Configuration$Parser.parseNext(Configuration.java:3347)
+	at org.apache.hadoop.conf.Configuration$Parser.parse(Configuration.java:3141)
+	at org.apache.hadoop.conf.Configuration.loadResource(Configuration.java:3034)
+	at org.apache.hadoop.conf.Configuration.loadResources(Configuration.java:2995)
+	at org.apache.hadoop.conf.Configuration.getProps(Configuration.java:2875)
+	at org.apache.hadoop.conf.Configuration.<init>(Configuration.java:843)
+	at org.apache.hadoop.mapred.JobConf.<init>(JobConf.java:458)
+	at org.apache.hadoop.mapreduce.Job.getInstance(Job.java:194)
+	at org.apache.hadoop.mapreduce.Job.getInstance(Job.java:214)
+	at org.apache.hadoop.examples.WordCount.main(WordCount.java:75)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.hadoop.util.ProgramDriver$ProgramDescription.invoke(ProgramDriver.java:71)
+	at org.apache.hadoop.util.ProgramDriver.run(ProgramDriver.java:144)
+	at org.apache.hadoop.examples.ExampleDriver.main(ExampleDriver.java:74)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.hadoop.util.RunJar.run(RunJar.java:323)
+	at org.apache.hadoop.util.RunJar.main(RunJar.java:236)
+java.lang.RuntimeException: com.ctc.wstx.exc.WstxParsingException: Illegal to have multiple roots (start tag in epilog?).
+ at [row,col,system-id]: [26,2,"file:/usr/local/hadoop/etc/hadoop/mapred-site.xml"]
+	at org.apache.hadoop.conf.Configuration.loadResource(Configuration.java:3051)
+	at org.apache.hadoop.conf.Configuration.loadResources(Configuration.java:2995)
+	at org.apache.hadoop.conf.Configuration.getProps(Configuration.java:2875)
+	at org.apache.hadoop.conf.Configuration.<init>(Configuration.java:843)
+	at org.apache.hadoop.mapred.JobConf.<init>(JobConf.java:458)
+	at org.apache.hadoop.mapreduce.Job.getInstance(Job.java:194)
+	at org.apache.hadoop.mapreduce.Job.getInstance(Job.java:214)
+	at org.apache.hadoop.examples.WordCount.main(WordCount.java:75)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.hadoop.util.ProgramDriver$ProgramDescription.invoke(ProgramDriver.java:71)
+	at org.apache.hadoop.util.ProgramDriver.run(ProgramDriver.java:144)
+	at org.apache.hadoop.examples.ExampleDriver.main(ExampleDriver.java:74)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.hadoop.util.RunJar.run(RunJar.java:323)
+	at org.apache.hadoop.util.RunJar.main(RunJar.java:236)
+Caused by: com.ctc.wstx.exc.WstxParsingException: Illegal to have multiple roots (start tag in epilog?).
+ at [row,col,system-id]: [26,2,"file:/usr/local/hadoop/etc/hadoop/mapred-site.xml"]
+	at com.ctc.wstx.sr.StreamScanner.constructWfcException(StreamScanner.java:621)
+	at com.ctc.wstx.sr.StreamScanner.throwParseError(StreamScanner.java:491)
+	at com.ctc.wstx.sr.StreamScanner.throwParseError(StreamScanner.java:475)
+	at com.ctc.wstx.sr.BasicStreamReader.handleExtraRoot(BasicStreamReader.java:2242)
+	at com.ctc.wstx.sr.BasicStreamReader.nextFromProlog(BasicStreamReader.java:2156)
+	at com.ctc.wstx.sr.BasicStreamReader.closeContentTree(BasicStreamReader.java:2991)
+	at com.ctc.wstx.sr.BasicStreamReader.nextFromTree(BasicStreamReader.java:2734)
+	at com.ctc.wstx.sr.BasicStreamReader.next(BasicStreamReader.java:1123)
+	at org.apache.hadoop.conf.Configuration$Parser.parseNext(Configuration.java:3347)
+	at org.apache.hadoop.conf.Configuration$Parser.parse(Configuration.java:3141)
+	at org.apache.hadoop.conf.Configuration.loadResource(Configuration.java:3034)
+	... 20 more
+2021-04-24 12:13:13,956 ERROR conf.Configuration: error parsing conf mapred-site.xml
+com.ctc.wstx.exc.WstxParsingException: Illegal to have multiple roots (start tag in epilog?).
+ at [row,col,system-id]: [26,2,"file:/usr/local/hadoop/etc/hadoop/mapred-site.xml"]
+	at com.ctc.wstx.sr.StreamScanner.constructWfcException(StreamScanner.java:621)
+	at com.ctc.wstx.sr.StreamScanner.throwParseError(StreamScanner.java:491)
+	at com.ctc.wstx.sr.StreamScanner.throwParseError(StreamScanner.java:475)
+	at com.ctc.wstx.sr.BasicStreamReader.handleExtraRoot(BasicStreamReader.java:2242)
+	at com.ctc.wstx.sr.BasicStreamReader.nextFromProlog(BasicStreamReader.java:2156)
+	at com.ctc.wstx.sr.BasicStreamReader.closeContentTree(BasicStreamReader.java:2991)
+	at com.ctc.wstx.sr.BasicStreamReader.nextFromTree(BasicStreamReader.java:2734)
+	at com.ctc.wstx.sr.BasicStreamReader.next(BasicStreamReader.java:1123)
+	at org.apache.hadoop.conf.Configuration$Parser.parseNext(Configuration.java:3347)
+	at org.apache.hadoop.conf.Configuration$Parser.parse(Configuration.java:3141)
+	at org.apache.hadoop.conf.Configuration.loadResource(Configuration.java:3034)
+	at org.apache.hadoop.conf.Configuration.loadResources(Configuration.java:2995)
+	at org.apache.hadoop.conf.Configuration.getProps(Configuration.java:2875)
+	at org.apache.hadoop.conf.Configuration.get(Configuration.java:1223)
+	at org.apache.hadoop.conf.Configuration.getTimeDuration(Configuration.java:1840)
+	at org.apache.hadoop.conf.Configuration.getTimeDuration(Configuration.java:1817)
+	at org.apache.hadoop.util.ShutdownHookManager.getShutdownTimeout(ShutdownHookManager.java:183)
+	at org.apache.hadoop.util.ShutdownHookManager.shutdownExecutor(ShutdownHookManager.java:145)
+	at org.apache.hadoop.util.ShutdownHookManager.access$300(ShutdownHookManager.java:65)
+	at org.apache.hadoop.util.ShutdownHookManager$1.run(ShutdownHookManager.java:102)
+Exception in thread "Thread-0" java.lang.RuntimeException: com.ctc.wstx.exc.WstxParsingException: Illegal to have multiple roots (start tag in epilog?).
+ at [row,col,system-id]: [26,2,"file:/usr/local/hadoop/etc/hadoop/mapred-site.xml"]
+	at org.apache.hadoop.conf.Configuration.loadResource(Configuration.java:3051)
+	at org.apache.hadoop.conf.Configuration.loadResources(Configuration.java:2995)
+	at org.apache.hadoop.conf.Configuration.getProps(Configuration.java:2875)
+	at org.apache.hadoop.conf.Configuration.get(Configuration.java:1223)
+	at org.apache.hadoop.conf.Configuration.getTimeDuration(Configuration.java:1840)
+	at org.apache.hadoop.conf.Configuration.getTimeDuration(Configuration.java:1817)
+	at org.apache.hadoop.util.ShutdownHookManager.getShutdownTimeout(ShutdownHookManager.java:183)
+	at org.apache.hadoop.util.ShutdownHookManager.shutdownExecutor(ShutdownHookManager.java:145)
+	at org.apache.hadoop.util.ShutdownHookManager.access$300(ShutdownHookManager.java:65)
+	at org.apache.hadoop.util.ShutdownHookManager$1.run(ShutdownHookManager.java:102)
+Caused by: com.ctc.wstx.exc.WstxParsingException: Illegal to have multiple roots (start tag in epilog?).
+ at [row,col,system-id]: [26,2,"file:/usr/local/hadoop/etc/hadoop/mapred-site.xml"]
+	at com.ctc.wstx.sr.StreamScanner.constructWfcException(StreamScanner.java:621)
+	at com.ctc.wstx.sr.StreamScanner.throwParseError(StreamScanner.java:491)
+	at com.ctc.wstx.sr.StreamScanner.throwParseError(StreamScanner.java:475)
+	at com.ctc.wstx.sr.BasicStreamReader.handleExtraRoot(BasicStreamReader.java:2242)
+	at com.ctc.wstx.sr.BasicStreamReader.nextFromProlog(BasicStreamReader.java:2156)
+	at com.ctc.wstx.sr.BasicStreamReader.closeContentTree(BasicStreamReader.java:2991)
+	at com.ctc.wstx.sr.BasicStreamReader.nextFromTree(BasicStreamReader.java:2734)
+	at com.ctc.wstx.sr.BasicStreamReader.next(BasicStreamReader.java:1123)
+	at org.apache.hadoop.conf.Configuration$Parser.parseNext(Configuration.java:3347)
+	at org.apache.hadoop.conf.Configuration$Parser.parse(Configuration.java:3141)
+	at org.apache.hadoop.conf.Configuration.loadResource(Configuration.java:3034)
+	... 9 more
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ cd etc/hadoop
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop/etc/hadoop$ sudo nano mapred-site.xml
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop/etc/hadoop$ cd ..
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop/etc$ cd ..
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.0.jar wordcount input output
+2021-04-24 12:15:40,927 ERROR conf.Configuration: error parsing conf mapred-site.xml
+com.ctc.wstx.exc.WstxParsingException: Illegal to have multiple roots (start tag in epilog?).
+ at [row,col,system-id]: [26,2,"file:/usr/local/hadoop/etc/hadoop/mapred-site.xml"]
+	at com.ctc.wstx.sr.StreamScanner.constructWfcException(StreamScanner.java:621)
+	at com.ctc.wstx.sr.StreamScanner.throwParseError(StreamScanner.java:491)
+	at com.ctc.wstx.sr.StreamScanner.throwParseError(StreamScanner.java:475)
+	at com.ctc.wstx.sr.BasicStreamReader.handleExtraRoot(BasicStreamReader.java:2242)
+	at com.ctc.wstx.sr.BasicStreamReader.nextFromProlog(BasicStreamReader.java:2156)
+	at com.ctc.wstx.sr.BasicStreamReader.closeContentTree(BasicStreamReader.java:2991)
+	at com.ctc.wstx.sr.BasicStreamReader.nextFromTree(BasicStreamReader.java:2734)
+	at com.ctc.wstx.sr.BasicStreamReader.next(BasicStreamReader.java:1123)
+	at org.apache.hadoop.conf.Configuration$Parser.parseNext(Configuration.java:3347)
+	at org.apache.hadoop.conf.Configuration$Parser.parse(Configuration.java:3141)
+	at org.apache.hadoop.conf.Configuration.loadResource(Configuration.java:3034)
+	at org.apache.hadoop.conf.Configuration.loadResources(Configuration.java:2995)
+	at org.apache.hadoop.conf.Configuration.getProps(Configuration.java:2875)
+	at org.apache.hadoop.conf.Configuration.<init>(Configuration.java:843)
+	at org.apache.hadoop.mapred.JobConf.<init>(JobConf.java:458)
+	at org.apache.hadoop.mapreduce.Job.getInstance(Job.java:194)
+	at org.apache.hadoop.mapreduce.Job.getInstance(Job.java:214)
+	at org.apache.hadoop.examples.WordCount.main(WordCount.java:75)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.hadoop.util.ProgramDriver$ProgramDescription.invoke(ProgramDriver.java:71)
+	at org.apache.hadoop.util.ProgramDriver.run(ProgramDriver.java:144)
+	at org.apache.hadoop.examples.ExampleDriver.main(ExampleDriver.java:74)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.hadoop.util.RunJar.run(RunJar.java:323)
+	at org.apache.hadoop.util.RunJar.main(RunJar.java:236)
+java.lang.RuntimeException: com.ctc.wstx.exc.WstxParsingException: Illegal to have multiple roots (start tag in epilog?).
+ at [row,col,system-id]: [26,2,"file:/usr/local/hadoop/etc/hadoop/mapred-site.xml"]
+	at org.apache.hadoop.conf.Configuration.loadResource(Configuration.java:3051)
+	at org.apache.hadoop.conf.Configuration.loadResources(Configuration.java:2995)
+	at org.apache.hadoop.conf.Configuration.getProps(Configuration.java:2875)
+	at org.apache.hadoop.conf.Configuration.<init>(Configuration.java:843)
+	at org.apache.hadoop.mapred.JobConf.<init>(JobConf.java:458)
+	at org.apache.hadoop.mapreduce.Job.getInstance(Job.java:194)
+	at org.apache.hadoop.mapreduce.Job.getInstance(Job.java:214)
+	at org.apache.hadoop.examples.WordCount.main(WordCount.java:75)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.hadoop.util.ProgramDriver$ProgramDescription.invoke(ProgramDriver.java:71)
+	at org.apache.hadoop.util.ProgramDriver.run(ProgramDriver.java:144)
+	at org.apache.hadoop.examples.ExampleDriver.main(ExampleDriver.java:74)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.hadoop.util.RunJar.run(RunJar.java:323)
+	at org.apache.hadoop.util.RunJar.main(RunJar.java:236)
+Caused by: com.ctc.wstx.exc.WstxParsingException: Illegal to have multiple roots (start tag in epilog?).
+ at [row,col,system-id]: [26,2,"file:/usr/local/hadoop/etc/hadoop/mapred-site.xml"]
+	at com.ctc.wstx.sr.StreamScanner.constructWfcException(StreamScanner.java:621)
+	at com.ctc.wstx.sr.StreamScanner.throwParseError(StreamScanner.java:491)
+	at com.ctc.wstx.sr.StreamScanner.throwParseError(StreamScanner.java:475)
+	at com.ctc.wstx.sr.BasicStreamReader.handleExtraRoot(BasicStreamReader.java:2242)
+	at com.ctc.wstx.sr.BasicStreamReader.nextFromProlog(BasicStreamReader.java:2156)
+	at com.ctc.wstx.sr.BasicStreamReader.closeContentTree(BasicStreamReader.java:2991)
+	at com.ctc.wstx.sr.BasicStreamReader.nextFromTree(BasicStreamReader.java:2734)
+	at com.ctc.wstx.sr.BasicStreamReader.next(BasicStreamReader.java:1123)
+	at org.apache.hadoop.conf.Configuration$Parser.parseNext(Configuration.java:3347)
+	at org.apache.hadoop.conf.Configuration$Parser.parse(Configuration.java:3141)
+	at org.apache.hadoop.conf.Configuration.loadResource(Configuration.java:3034)
+	... 20 more
+2021-04-24 12:15:40,947 ERROR conf.Configuration: error parsing conf mapred-site.xml
+com.ctc.wstx.exc.WstxParsingException: Illegal to have multiple roots (start tag in epilog?).
+ at [row,col,system-id]: [26,2,"file:/usr/local/hadoop/etc/hadoop/mapred-site.xml"]
+	at com.ctc.wstx.sr.StreamScanner.constructWfcException(StreamScanner.java:621)
+	at com.ctc.wstx.sr.StreamScanner.throwParseError(StreamScanner.java:491)
+	at com.ctc.wstx.sr.StreamScanner.throwParseError(StreamScanner.java:475)
+	at com.ctc.wstx.sr.BasicStreamReader.handleExtraRoot(BasicStreamReader.java:2242)
+	at com.ctc.wstx.sr.BasicStreamReader.nextFromProlog(BasicStreamReader.java:2156)
+	at com.ctc.wstx.sr.BasicStreamReader.closeContentTree(BasicStreamReader.java:2991)
+	at com.ctc.wstx.sr.BasicStreamReader.nextFromTree(BasicStreamReader.java:2734)
+	at com.ctc.wstx.sr.BasicStreamReader.next(BasicStreamReader.java:1123)
+	at org.apache.hadoop.conf.Configuration$Parser.parseNext(Configuration.java:3347)
+	at org.apache.hadoop.conf.Configuration$Parser.parse(Configuration.java:3141)
+	at org.apache.hadoop.conf.Configuration.loadResource(Configuration.java:3034)
+	at org.apache.hadoop.conf.Configuration.loadResources(Configuration.java:2995)
+	at org.apache.hadoop.conf.Configuration.getProps(Configuration.java:2875)
+	at org.apache.hadoop.conf.Configuration.get(Configuration.java:1223)
+	at org.apache.hadoop.conf.Configuration.getTimeDuration(Configuration.java:1840)
+	at org.apache.hadoop.conf.Configuration.getTimeDuration(Configuration.java:1817)
+	at org.apache.hadoop.util.ShutdownHookManager.getShutdownTimeout(ShutdownHookManager.java:183)
+	at org.apache.hadoop.util.ShutdownHookManager.shutdownExecutor(ShutdownHookManager.java:145)
+	at org.apache.hadoop.util.ShutdownHookManager.access$300(ShutdownHookManager.java:65)
+	at org.apache.hadoop.util.ShutdownHookManager$1.run(ShutdownHookManager.java:102)
+Exception in thread "Thread-0" java.lang.RuntimeException: com.ctc.wstx.exc.WstxParsingException: Illegal to have multiple roots (start tag in epilog?).
+ at [row,col,system-id]: [26,2,"file:/usr/local/hadoop/etc/hadoop/mapred-site.xml"]
+	at org.apache.hadoop.conf.Configuration.loadResource(Configuration.java:3051)
+	at org.apache.hadoop.conf.Configuration.loadResources(Configuration.java:2995)
+	at org.apache.hadoop.conf.Configuration.getProps(Configuration.java:2875)
+	at org.apache.hadoop.conf.Configuration.get(Configuration.java:1223)
+	at org.apache.hadoop.conf.Configuration.getTimeDuration(Configuration.java:1840)
+	at org.apache.hadoop.conf.Configuration.getTimeDuration(Configuration.java:1817)
+	at org.apache.hadoop.util.ShutdownHookManager.getShutdownTimeout(ShutdownHookManager.java:183)
+	at org.apache.hadoop.util.ShutdownHookManager.shutdownExecutor(ShutdownHookManager.java:145)
+	at org.apache.hadoop.util.ShutdownHookManager.access$300(ShutdownHookManager.java:65)
+	at org.apache.hadoop.util.ShutdownHookManager$1.run(ShutdownHookManager.java:102)
+Caused by: com.ctc.wstx.exc.WstxParsingException: Illegal to have multiple roots (start tag in epilog?).
+ at [row,col,system-id]: [26,2,"file:/usr/local/hadoop/etc/hadoop/mapred-site.xml"]
+	at com.ctc.wstx.sr.StreamScanner.constructWfcException(StreamScanner.java:621)
+	at com.ctc.wstx.sr.StreamScanner.throwParseError(StreamScanner.java:491)
+	at com.ctc.wstx.sr.StreamScanner.throwParseError(StreamScanner.java:475)
+	at com.ctc.wstx.sr.BasicStreamReader.handleExtraRoot(BasicStreamReader.java:2242)
+	at com.ctc.wstx.sr.BasicStreamReader.nextFromProlog(BasicStreamReader.java:2156)
+	at com.ctc.wstx.sr.BasicStreamReader.closeContentTree(BasicStreamReader.java:2991)
+	at com.ctc.wstx.sr.BasicStreamReader.nextFromTree(BasicStreamReader.java:2734)
+	at com.ctc.wstx.sr.BasicStreamReader.next(BasicStreamReader.java:1123)
+	at org.apache.hadoop.conf.Configuration$Parser.parseNext(Configuration.java:3347)
+	at org.apache.hadoop.conf.Configuration$Parser.parse(Configuration.java:3141)
+	at org.apache.hadoop.conf.Configuration.loadResource(Configuration.java:3034)
+	... 9 more
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ cd ..
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local$ cd hadoop
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ cd etc/hadoop
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop/etc/hadoop$ sudo nano mapred-site.xml
+
+
+Use "fg" to return to nano.
+
+[1]+  Stopped                 sudo nano mapred-site.xml
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop/etc/hadoop$ sudo nano mapred-site.xml
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop/etc/hadoop$ cd ..
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop/etc$ cd ..
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.0.jar wordcount input output
+2021-04-24 12:18:20,557 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2021-04-24 12:18:21,012 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at /0.0.0.0:8032
+2021-04-24 12:18:21,295 INFO mapreduce.JobResourceUploader: Disabling Erasure Coding for path: /tmp/hadoop-yarn/staging/hadoopusr/.staging/job_1619243112767_0008
+2021-04-24 12:18:21,451 INFO input.FileInputFormat: Total input files to process : 1
+2021-04-24 12:18:21,497 INFO mapreduce.JobSubmitter: number of splits:1
+2021-04-24 12:18:21,584 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1619243112767_0008
+2021-04-24 12:18:21,584 INFO mapreduce.JobSubmitter: Executing with tokens: []
+2021-04-24 12:18:21,715 INFO conf.Configuration: resource-types.xml not found
+2021-04-24 12:18:21,716 INFO resource.ResourceUtils: Unable to find 'resource-types.xml'.
+2021-04-24 12:18:21,770 INFO impl.YarnClientImpl: Submitted application application_1619243112767_0008
+2021-04-24 12:18:21,797 INFO mapreduce.Job: The url to track the job: http://amber-VivoBook-ASUSLaptop-X430FA-S430FA:8088/proxy/application_1619243112767_0008/
+2021-04-24 12:18:21,798 INFO mapreduce.Job: Running job: job_1619243112767_0008
+2021-04-24 12:18:24,841 INFO mapreduce.Job: Job job_1619243112767_0008 running in uber mode : false
+2021-04-24 12:18:24,843 INFO mapreduce.Job:  map 0% reduce 0%
+2021-04-24 12:18:24,860 INFO mapreduce.Job: Job job_1619243112767_0008 failed with state FAILED due to: Application application_1619243112767_0008 failed 2 times due to AM Container for appattempt_1619243112767_0008_000002 exited with  exitCode: 1
+Failing this attempt.Diagnostics: [2021-04-24 12:18:24.432]Exception from container-launch.
+Container id: container_1619243112767_0008_02_000001
+Exit code: 1
+
+[2021-04-24 12:18:24.434]Container exited with a non-zero exit code 1. Error file: prelaunch.err.
+Last 4096 bytes of prelaunch.err :
+Last 4096 bytes of stderr :
+Error: Could not find or load main class org.apache.hadoop.mapreduce.v2.app.MRAppMaster
+
+Please check whether your <HADOOP_HOME>/etc/hadoop/mapred-site.xml contains the below configuration:
+<property>
+  <name>yarn.app.mapreduce.am.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+<property>
+  <name>mapreduce.map.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+<property>
+  <name>mapreduce.reduce.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+
+[2021-04-24 12:18:24.434]Container exited with a non-zero exit code 1. Error file: prelaunch.err.
+Last 4096 bytes of prelaunch.err :
+Last 4096 bytes of stderr :
+Error: Could not find or load main class org.apache.hadoop.mapreduce.v2.app.MRAppMaster
+
+Please check whether your <HADOOP_HOME>/etc/hadoop/mapred-site.xml contains the below configuration:
+<property>
+  <name>yarn.app.mapreduce.am.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+<property>
+  <name>mapreduce.map.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+<property>
+  <name>mapreduce.reduce.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+
+For more detailed output, check the application tracking page: http://amber-VivoBook-ASUSLaptop-X430FA-S430FA:8088/cluster/app/application_1619243112767_0008 Then click on links to logs of each attempt.
+. Failing the application.
+2021-04-24 12:18:24,883 INFO mapreduce.Job: Counters: 0
+hadoopusr@amber-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ stop-all.sh
+WARNING: Stopping all Apache Hadoop daemons as hadoopusr in 10 seconds.
+WARNING: Use CTRL-C to abort.
+Stopping namenodes on [localhost]
+Stopping datanodes
+Stopping secondary namenodes [amber-VivoBook-ASUSLaptop-X430FA-S430FA]
+2021-04-24 12:20:07,626 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Stopping nodemanagers
+localhost: WARNING: nodemanager did not stop gracefully after 5 seconds: Trying to kill with kill -9
+Stopping resourcemanager
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ start-all.sh
+WARNING: Attempting to start all Apache Hadoop daemons as hadoopusr in 10 seconds.
+WARNING: This is not a recommended production deployment configuration.
+WARNING: Use CTRL-C to abort.
+Starting namenodes on [localhost]
+Starting datanodes
+Starting secondary namenodes [amber-VivoBook-ASUSLaptop-X430FA-S430FA]
+2021-04-24 12:20:41,980 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Starting resourcemanager
+Starting nodemanagers
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.0.jar wordcount input output
+2021-04-24 12:22:34,167 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2021-04-24 12:22:34,595 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at /0.0.0.0:8032
+2021-04-24 12:22:34,891 INFO mapreduce.JobResourceUploader: Disabling Erasure Coding for path: /tmp/hadoop-yarn/staging/hadoopusr/.staging/job_1619247045455_0001
+2021-04-24 12:22:35,547 INFO input.FileInputFormat: Total input files to process : 1
+2021-04-24 12:22:36,021 INFO mapreduce.JobSubmitter: number of splits:1
+2021-04-24 12:22:36,123 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1619247045455_0001
+2021-04-24 12:22:36,123 INFO mapreduce.JobSubmitter: Executing with tokens: []
+2021-04-24 12:22:36,262 INFO conf.Configuration: resource-types.xml not found
+2021-04-24 12:22:36,262 INFO resource.ResourceUtils: Unable to find 'resource-types.xml'.
+2021-04-24 12:22:36,480 INFO impl.YarnClientImpl: Submitted application application_1619247045455_0001
+2021-04-24 12:22:36,511 INFO mapreduce.Job: The url to track the job: http://amber-VivoBook-ASUSLaptop-X430FA-S430FA:8088/proxy/application_1619247045455_0001/
+2021-04-24 12:22:36,512 INFO mapreduce.Job: Running job: job_1619247045455_0001
+2021-04-24 12:22:39,557 INFO mapreduce.Job: Job job_1619247045455_0001 running in uber mode : false
+2021-04-24 12:22:39,558 INFO mapreduce.Job:  map 0% reduce 0%
+2021-04-24 12:22:39,579 INFO mapreduce.Job: Job job_1619247045455_0001 failed with state FAILED due to: Application application_1619247045455_0001 failed 2 times due to AM Container for appattempt_1619247045455_0001_000002 exited with  exitCode: 1
+Failing this attempt.Diagnostics: [2021-04-24 12:22:39.159]Exception from container-launch.
+Container id: container_1619247045455_0001_02_000001
+Exit code: 1
+
+[2021-04-24 12:22:39.162]Container exited with a non-zero exit code 1. Error file: prelaunch.err.
+Last 4096 bytes of prelaunch.err :
+Last 4096 bytes of stderr :
+Error: Could not find or load main class org.apache.hadoop.mapreduce.v2.app.MRAppMaster
+
+Please check whether your <HADOOP_HOME>/etc/hadoop/mapred-site.xml contains the below configuration:
+<property>
+  <name>yarn.app.mapreduce.am.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+<property>
+  <name>mapreduce.map.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+<property>
+  <name>mapreduce.reduce.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+
+[2021-04-24 12:22:39.162]Container exited with a non-zero exit code 1. Error file: prelaunch.err.
+Last 4096 bytes of prelaunch.err :
+Last 4096 bytes of stderr :
+Error: Could not find or load main class org.apache.hadoop.mapreduce.v2.app.MRAppMaster
+
+Please check whether your <HADOOP_HOME>/etc/hadoop/mapred-site.xml contains the below configuration:
+<property>
+  <name>yarn.app.mapreduce.am.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+<property>
+  <name>mapreduce.map.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+<property>
+  <name>mapreduce.reduce.env</name>
+  <value>HADOOP_MAPRED_HOME=${full path of your hadoop distribution directory}</value>
+</property>
+
+For more detailed output, check the application tracking page: http://amber-VivoBook-ASUSLaptop-X430FA-S430FA:8088/cluster/app/application_1619247045455_0001 Then click on links to logs of each attempt.
+. Failing the application.
+2021-04-24 12:22:39,602 INFO mapreduce.Job: Counters: 0
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ cd etc/hadoop
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop/etc/hadoop$ sudo nano mapred-site.xml
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop/etc/hadoop$ cd ..
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop/etc$ cd ..
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.0.jar wordcount input output
+2021-04-24 12:25:08,843 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2021-04-24 12:25:09,271 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at /0.0.0.0:8032
+2021-04-24 12:25:09,532 INFO mapreduce.JobResourceUploader: Disabling Erasure Coding for path: /tmp/hadoop-yarn/staging/hadoopusr/.staging/job_1619247045455_0002
+2021-04-24 12:25:09,692 INFO input.FileInputFormat: Total input files to process : 1
+2021-04-24 12:25:09,739 INFO mapreduce.JobSubmitter: number of splits:1
+2021-04-24 12:25:10,241 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1619247045455_0002
+2021-04-24 12:25:10,242 INFO mapreduce.JobSubmitter: Executing with tokens: []
+2021-04-24 12:25:10,391 INFO conf.Configuration: resource-types.xml not found
+2021-04-24 12:25:10,391 INFO resource.ResourceUtils: Unable to find 'resource-types.xml'.
+2021-04-24 12:25:10,446 INFO impl.YarnClientImpl: Submitted application application_1619247045455_0002
+2021-04-24 12:25:10,476 INFO mapreduce.Job: The url to track the job: http://amber-VivoBook-ASUSLaptop-X430FA-S430FA:8088/proxy/application_1619247045455_0002/
+2021-04-24 12:25:10,476 INFO mapreduce.Job: Running job: job_1619247045455_0002
+2021-04-24 12:25:15,609 INFO mapreduce.Job: Job job_1619247045455_0002 running in uber mode : false
+2021-04-24 12:25:15,612 INFO mapreduce.Job:  map 0% reduce 0%
+2021-04-24 12:25:19,673 INFO mapreduce.Job:  map 100% reduce 0%
+2021-04-24 12:25:23,710 INFO mapreduce.Job:  map 100% reduce 100%
+2021-04-24 12:25:23,734 INFO mapreduce.Job: Job job_1619247045455_0002 completed successfully
+2021-04-24 12:25:23,811 INFO mapreduce.Job: Counters: 54
+	File System Counters
+		FILE: Number of bytes read=12862
+		FILE: Number of bytes written=555751
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=15804
+		HDFS: Number of bytes written=10001
+		HDFS: Number of read operations=8
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+		HDFS: Number of bytes read erasure-coded=0
+	Job Counters 
+		Launched map tasks=1
+		Launched reduce tasks=1
+		Data-local map tasks=1
+		Total time spent by all maps in occupied slots (ms)=1611
+		Total time spent by all reduces in occupied slots (ms)=1731
+		Total time spent by all map tasks (ms)=1611
+		Total time spent by all reduce tasks (ms)=1731
+		Total vcore-milliseconds taken by all map tasks=1611
+		Total vcore-milliseconds taken by all reduce tasks=1731
+		Total megabyte-milliseconds taken by all map tasks=1649664
+		Total megabyte-milliseconds taken by all reduce tasks=1772544
+	Map-Reduce Framework
+		Map input records=281
+		Map output records=1831
+		Map output bytes=21869
+		Map output materialized bytes=12862
+		Input split bytes=107
+		Combine input records=1831
+		Combine output records=720
+		Reduce input groups=720
+		Reduce shuffle bytes=12862
+		Reduce input records=720
+		Reduce output records=720
+		Spilled Records=1440
+		Shuffled Maps =1
+		Failed Shuffles=0
+		Merged Map outputs=1
+		GC time elapsed (ms)=63
+		CPU time spent (ms)=950
+		Physical memory (bytes) snapshot=540336128
+		Virtual memory (bytes) snapshot=5176135680
+		Total committed heap usage (bytes)=460324864
+		Peak Map Physical memory (bytes)=350248960
+		Peak Map Virtual memory (bytes)=2583863296
+		Peak Reduce Physical memory (bytes)=190087168
+		Peak Reduce Virtual memory (bytes)=2592272384
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=15697
+	File Output Format Counters 
+		Bytes Written=10001
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ hdfs dfs -ls /usr/local/hadoop/output
+2021-04-24 12:31:58,976 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+ls: `/usr/local/hadoop/output': No such file or directory
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ hdfs dfs -ls output
+2021-04-24 12:32:10,768 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 2 items
+-rw-r--r--   1 hadoopusr supergroup          0 2021-04-24 12:25 output/_SUCCESS
+-rw-r--r--   1 hadoopusr supergroup      10001 2021-04-24 12:25 output/part-r-00000
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ hdfs dfs -cat part-r-00000
+2021-04-24 12:32:59,310 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+cat: `part-r-00000': No such file or directory
+hadoopusr@amber-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ hdfs dfs -cat part-r-00000.txt
+2021-04-24 12:33:08,022 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+cat: `part-r-00000.txt': No such file or directory
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ hdfs dfs -cat output/part-r-00000
+2021-04-24 12:33:30,241 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+"AS	3
+"Contribution"	1
+"Contributor"	1
+"Derivative	1
+"Legal	1
+"License"	1
+"License");	1
+"Licensor"	1
+"NOTICE"	1
+"Not	1
+"Object"	1
+"Software"),	1
+"Source"	1
+"Work"	1
+"You"	1
+"Your")	1
+"[]"	1
+"control"	1
+"printed	1
+"submitted"	1
+(50%)	1
+(Don't	1
+(a)	1
+(an	1
+(and	1
+(b)	1
+(c)	2
+(css	1
+(d)	1
+(except	1
+(i)	1
+(ii)	1
+(iii)	1
+(including	3
+(or	3
+(such	1
+(the	2
+-----------	1
+------------	2
+--------------------------------------	1
+--------------------------------------------------------------------------------	1
+1	1
+1.	1
+2-Clause	1
+2.	1
+2.0	2
+2.0,	1
+2004	1
+2009-2017	1
+3-Clause	1
+3.	1
+4.	1
+5.	1
+6.	1
+7.	1
+8.	1
+9	1
+9.	1
+=======	1
+A	2
+ACTION	1
+AN	1
+AND	4
+ANY	4
+APPENDIX:	1
+ARISING	1
+AUTHORS	1
+Accepting	1
+Additional	1
+Apache	5
+Appendix	1
+BASIS,	2
+BE	1
+BSD	2
+BUT	1
+CLAIM,	1
+CONDITIONS	4
+CONNECTION	1
+CONTRACT,	1
+COPYRIGHT	1
+Contribution	3
+Contribution(s)	3
+Contribution."	1
+Contributions)	1
+Contributions.	2
+Contributor	8
+Contributor,	1
+Copyright	3
+DAMAGES	1
+DEALINGS	1
+DISTRIBUTION	1
+Dave	1
+Definitions.	1
+Derivative	17
+Disclaimer	1
+END	1
+EVENT	1
+EXPRESS	1
+Entity	3
+Entity"	1
+FITNESS	2
+FOR	4
+FROM,	1
+For	4
+Foundation	1
+Gamble	1
+Grant	2
+HOLDERS	1
+How	1
+However,	1
+IMPLIED,	1
+IN	4
+INCLUDING	1
+IS	1
+IS"	2
+IS",	1
+If	2
+In	1
+January	1
+KIND,	3
+LIABILITY,	1
+LIABLE	1
+LIMITED	1
+Legal	3
+Liability.	2
+License	11
+License,	6
+License.	11
+License;	1
+Licensed	1
+Licensor	8
+Licensor,	1
+Limitation	1
+MERCHANTABILITY,	2
+MIT	1
+NO	1
+NON-INFRINGEMENT,	1
+NONINFRINGEMENT.	1
+NOT	1
+NOTICE	5
+Notwithstanding	1
+OF	7
+OR	9
+OTHER	2
+OTHERWISE,	1
+OUT	1
+Object	4
+PARTICULAR	2
+PROVIDED	1
+PURPOSE	1
+PURPOSE.	1
+Patent	1
+Permission	1
+REPRODUCTION,	1
+Redistribution.	1
+SHALL	1
+SOFTWARE	2
+SOFTWARE.	1
+Sections	1
+See	2
+Software	3
+Software,	1
+Software.	1
+Source	8
+Subject	2
+Submission	1
+TERMS	2
+THE	6
+TITLE,	1
+TO	1
+TORT	1
+The	3
+This	3
+To	1
+Trademarks.	1
+USE	1
+USE,	1
+Unless	3
+Version	2
+WARRANTIES	3
+WARRANTY	1
+WHETHER	1
+WITH	1
+WITHOUT	3
+Warranty	1
+Warranty.	1
+We	1
+While	1
+Work	20
+Work,	4
+Work.	1
+Works	12
+Works"	1
+Works,	2
+Works;	3
+You	23
+Your	8
+[name	1
+[yyyy]	1
+a	21
+above	1
+above,	1
+acceptance	1
+accepting	2
+act	1
+acting	1
+acts)	1
+add	2
+addendum	1
+additional	4
+additions	1
+advised	1
+against	1
+against,	1
+agree	1
+agreed	3
+agreement	1
+all	4
+alleging	1
+alone	1
+along	1
+alongside	1
+also	1
+an	6
+and	47
+and/or	2
+annotations,	1
+any	29
+appear.	1
+applicable	3
+applies	1
+apply	2
+appropriate	1
+appropriateness	1
+archives.	1
+are	6
+arising	1
+as	15
+asserted	1
+associated	2
+assume	1
+at	2
+attach	1
+attached	1
+attribution	4
+authorized	2
+authorship,	2
+authorship.	1
+available	1
+based	1
+be	6
+been	2
+behalf	5
+below).	1
+beneficial	1
+bind	1
+boilerplate	1
+brackets	1
+brackets!)	1
+bundles	1
+but	5
+by	20
+by,	3
+cJSON	1
+cannot	1
+carry	1
+cause	2
+changed	1
+character	1
+charge	1
+charge,	1
+choose	1
+claims	2
+class	1
+code	1
+code,	2
+combination	1
+comment	1
+commercial	1
+common	1
+communication	3
+compiled	1
+compliance	1
+complies	1
+components	2
+computer	1
+conditions	7
+conditions.	1
+conditions:	2
+configuration	1
+consequential	1
+consistent	1
+conspicuously	1
+constitutes	1
+construed	1
+contained	1
+content	1
+contents	1
+contract	1
+contract,	1
+contributors	1
+contributory	1
+control	2
+control,	1
+controlled	1
+conversions	1
+copies	3
+copy	4
+copy,	1
+copyright	11
+copyright,	1
+counterclaim	1
+cross-claim	1
+customary	1
+damages	3
+damages,	1
+damages.	1
+date	1
+deal	1
+defend,	1
+defined	1
+definition,	2
+deliberate	1
+derived	1
+describing	1
+description	1
+designated	1
+determining	1
+different	1
+direct	2
+direct,	1
+direction	1
+discussing	1
+display	1
+display,	1
+distribute	3
+distribute,	3
+distributed	3
+distribution	3
+distribution,	1
+do	4
+document.	1
+documentation	2
+documentation,	2
+does	1
+each	4
+easier	1
+editorial	1
+either	2
+elaborations,	1
+electronic	1
+electronic,	1
+enclosed	2
+entities	1
+entity	3
+entity,	1
+entity.	2
+even	1
+event	1
+example	1
+except	2
+excluding	3
+executed	1
+exercise	1
+exercising	1
+explicitly	1
+express	2
+failure	1
+fee	1
+fields	1
+fifty	1
+file	6
+file,	1
+file.	1
+filed.	1
+files	2
+files)	1
+files.	1
+files;	1
+following	4
+for	19
+for,	1
+form	8
+form,	4
+form.	1
+format.	1
+free	1
+from	3
+from)	1
+from,	1
+furnished	1
+generated	2
+give	1
+goodwill,	1
+governing	1
+grant	1
+granted	2
+granted,	1
+granting	1
+grants	2
+grossly	1
+hadoop-common-project/hadoop-common/src/main/java/org/apache/hadoop/util/bloom/*	1
+hadoop-common-project/hadoop-common/src/main/native/gtest/gtest-all.cc	1
+hadoop-common-project/hadoop-common/src/main/native/gtest/include/gtest/gtest.h	1
+hadoop-common-project/hadoop-common/src/main/native/src/org/apache/hadoop/io/compress/lz4/{lz4.h,lz4.c,lz4hc.h,lz4hc.c}	1
+hadoop-common-project/hadoop-common/src/main/native/src/org/apache/hadoop/util/bulk_crc32_x86.c1
+hadoop-hdfs-project/hadoop-hdfs-native-client/src/main/native/fuse-dfs/util/tree.h	1
+hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/datanode/checker/AbstractFuture.java	1
+hadoop-hdfs-project/hadoop-hdfs/src/main/java/org/apache/hadoop/hdfs/server/datanode/checker/TimeoutFuture.java	1
+hadoop-hdfs-project/hadoop-hdfs/src/main/webapps/static/angular-1.6.4.min.js	1
+hadoop-hdfs-project/hadoop-hdfs/src/main/webapps/static/angular-nvd3-1.0.9.min.js	1
+hadoop-hdfs-project/hadoop-hdfs/src/main/webapps/static/angular-route-1.6.4.min.js	1
+hadoop-hdfs-project/hadoop-hdfs/src/main/webapps/static/bootstrap-3.4.1	1
+hadoop-hdfs-project/hadoop-hdfs/src/main/webapps/static/d3-3.5.17.min.js	1
+hadoop-hdfs-project/hadoop-hdfs/src/main/webapps/static/dataTables.bootstrap.css	1
+hadoop-hdfs-project/hadoop-hdfs/src/main/webapps/static/dataTables.bootstrap.js	1
+hadoop-hdfs-project/hadoop-hdfs/src/main/webapps/static/dust-full-2.0.0.min.js	1
+hadoop-hdfs-project/hadoop-hdfs/src/main/webapps/static/dust-helpers-1.1.1.min.js	1
+hadoop-hdfs-project/hadoop-hdfs/src/main/webapps/static/jquery-3.4.1.min.js	1
+hadoop-hdfs-project/hadoop-hdfs/src/main/webapps/static/jquery.dataTables.min.js	1
+hadoop-hdfs-project/hadoop-hdfs/src/main/webapps/static/moment.min.js	1
+hadoop-hdfs-project/hadoop-hdfs/src/main/webapps/static/nvd3-1.8.5.*	1
+hadoop-tools/hadoop-sls/src/main/html/css/bootstrap-responsive.min.css	1
+hadoop-tools/hadoop-sls/src/main/html/css/bootstrap.min.css	1
+hadoop-tools/hadoop-sls/src/main/html/js/thirdparty/bootstrap.min.js	1
+hadoop-tools/hadoop-sls/src/main/html/js/thirdparty/d3.v3.js	1
+hadoop-tools/hadoop-sls/src/main/html/js/thirdparty/jquery.js	1
+hadoop-yarn-project/hadoop-yarn/hadoop-yarn-common/src/main/resources/webapps/static/dt-1.10.18/*	1
+hadoop-yarn-project/hadoop-yarn/hadoop-yarn-common/src/main/resources/webapps/static/jquery	1
+hadoop-yarn-project/hadoop-yarn/hadoop-yarn-common/src/main/resources/webapps/static/jt/jquery.jstree.js	1
+hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/native/container-executor/impl/compat/{fstatat|openat|unlinkat}.h	1
+hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/native/container-executor/impl/utils/cJSON.[ch]:	1
+hadoop-yarn-project/hadoop-yarn/hadoop-yarn-server/hadoop-yarn-server-nodemanager/src/main/resources/TERMINAL	1
+harmless	1
+has	2
+have	2
+hereby	3
+herein	1
+hold	1
+http://www.apache.org/licenses/	1
+http://www.apache.org/licenses/LICENSE-2.0	1
+identification	1
+identifying	1
+if	4
+implied,	1
+implied.	1
+import,	1
+improving	1
+in	25
+inability	1
+incidental,	1
+include	3
+included	3
+includes	1
+including	6
+including,	1
+inclusion	2
+incorporated	2
+incurred	1
+indemnify,	1
+indemnity,	1
+indicated	1
+indirect,	2
+individual	3
+information.	1
+informational	1
+infringed	1
+infringement,	1
+institute	1
+intentionally	2
+interfaces	1
+irrevocable	2
+is	10
+issue	1
+its	3
+js	1
+language	1
+law	3
+lawsuit)	1
+least	1
+legal	1
+liability	2
+liability.	1
+liable	1
+licensable	1
+license	5
+licenses	1
+licenses.	3
+licenses/	1
+limitation	1
+limitation,	1
+limitations	1
+limited	4
+link	1
+lists,	1
+litigation	2
+loss	1
+losses),	1
+made	1
+made,	1
+mailing	1
+make,	1
+making	1
+malfunction,	1
+managed	1
+management	1
+marked	1
+marks,	1
+may	9
+mean	10
+means	2
+mechanical	1
+media	1
+medium,	1
+meet	1
+merely	1
+merge,	1
+modifications	3
+modifications,	3
+modified	1
+modify	2
+modify,	1
+modifying	1
+more	1
+must	4
+name	1
+name)	1
+names	1
+names,	1
+necessarily	1
+negligence),	1
+negligent	1
+no	2
+no-charge,	2
+non-exclusive,	2
+normally	1
+not	11
+nothing	1
+notice	4
+notice,	1
+notices	8
+object	1
+obligations	1
+obligations,	1
+obtain	1
+obtaining	1
+of	66
+of,	3
+offer	1
+offer,	1
+on	11
+one	1
+only	4
+open	1
+or	63
+or,	1
+origin	1
+original	2
+other	8
+otherwise	3
+otherwise,	3
+out	1
+outstanding	1
+own	4
+owner	4
+owner.	1
+owner]	1
+ownership	2
+page"	1
+part	4
+patent	5
+patent,	1
+percent	1
+perform,	1
+permission	2
+permissions	3
+permit	1
+perpetual,	2
+person	1
+persons	1
+pertain	2
+places:	1
+portions	1
+possibility	1
+power,	1
+preferred	1
+prepare	1
+product	2
+prominent	1
+provide	1
+provided	5
+provides	2
+publicly	2
+publish,	1
+purpose	2
+purposes	4
+readable	1
+reason	1
+reasonable	1
+received	1
+recipients	1
+recommend	1
+redistributing	2
+regarding	1
+remain	1
+replaced	1
+represent,	1
+representatives,	1
+reproduce	1
+reproduce,	1
+reproducing	1
+reproduction,	3
+required	4
+responsibility,	1
+responsible	1
+restriction,	1
+result	1
+resulting	1
+retain,	1
+revisions,	1
+rights	2
+risks	1
+royalty-free,	2
+same	1
+section	1
+section)	1
+sell	1
+sell,	2
+sent	1
+separable	1
+separate	1
+service	1
+shall	16
+shares,	1
+should	1
+so,	1
+software	3
+sole	1
+solely	1
+source	3
+source,	1
+special,	1
+specific	1
+state	1
+stated	2
+statement	1
+stating	1
+stoppage,	1
+subject	1
+sublicense,	2
+submit	1
+submitted	2
+submitted.	1
+subsequently	1
+substantial	1
+such	17
+summarizes	1
+supersede	1
+support,	1
+syntax	1
+systems	1
+systems,	1
+terminate	1
+terms	7
+text	5
+that	22
+the	103
+their	3
+then	2
+theory,	1
+thereof	1
+thereof,	2
+thereof.	1
+these	1
+third-party	3
+this	18
+those	4
+through	1
+to	46
+tort	1
+tracking	1
+trade	1
+trademark,	1
+trademarks,	1
+transfer	1
+transformation	1
+translation	1
+types.	1
+under	10
+union	1
+unless	1
+use	5
+use,	5
+using	1
+various	1
+verbal,	1
+version	1
+warranties	1
+warranty	1
+warranty,	1
+was	1
+where	1
+wherever	1
+whether	4
+which	2
+whole,	2
+whom	2
+with	11
+within	8
+without	5
+work	5
+work,	2
+work.	1
+works	1
+worldwide,	2
+writing	1
+writing,	3
+written	1
+you	2
+your	4
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ hdfs dfs -put test.txt input
+2021-04-24 17:25:56,402 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+put: `input': File exists
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ hdfs dfs -put test.txt input1
+2021-04-24 17:26:33,429 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+hadoopusr@amber-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.0.jar wordcount input output
+JAR does not exist or is not a normal file: /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.0.jar
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.0.jar wordcount input1 output
+2021-04-24 17:27:15,473 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2021-04-24 17:27:15,897 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at /0.0.0.0:8032
+org.apache.hadoop.mapred.FileAlreadyExistsException: Output directory hdfs://localhost:9000/user/hadoopusr/output already exists
+	at org.apache.hadoop.mapreduce.lib.output.FileOutputFormat.checkOutputSpecs(FileOutputFormat.java:164)
+	at org.apache.hadoop.mapreduce.JobSubmitter.checkSpecs(JobSubmitter.java:277)
+	at org.apache.hadoop.mapreduce.JobSubmitter.submitJobInternal(JobSubmitter.java:143)
+	at org.apache.hadoop.mapreduce.Job$11.run(Job.java:1576)
+	at org.apache.hadoop.mapreduce.Job$11.run(Job.java:1573)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAs(Subject.java:422)
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1845)
+	at org.apache.hadoop.mapreduce.Job.submit(Job.java:1573)
+	at org.apache.hadoop.mapreduce.Job.waitForCompletion(Job.java:1594)
+	at org.apache.hadoop.examples.WordCount.main(WordCount.java:87)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.hadoop.util.ProgramDriver$ProgramDescription.invoke(ProgramDriver.java:71)
+	at org.apache.hadoop.util.ProgramDriver.run(ProgramDriver.java:144)
+	at org.apache.hadoop.examples.ExampleDriver.main(ExampleDriver.java:74)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.hadoop.util.RunJar.run(RunJar.java:323)
+	at org.apache.hadoop.util.RunJar.main(RunJar.java:236)
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.0.jar wordcount input1 output1
+2021-04-24 17:27:33,178 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+2021-04-24 17:27:33,607 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at /0.0.0.0:8032
+2021-04-24 17:27:33,863 INFO mapreduce.JobResourceUploader: Disabling Erasure Coding for path: /tmp/hadoop-yarn/staging/hadoopusr/.staging/job_1619247045455_0003
+2021-04-24 17:27:34,013 INFO input.FileInputFormat: Total input files to process : 1
+2021-04-24 17:27:34,056 INFO mapreduce.JobSubmitter: number of splits:1
+2021-04-24 17:27:34,154 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1619247045455_0003
+2021-04-24 17:27:34,154 INFO mapreduce.JobSubmitter: Executing with tokens: []
+2021-04-24 17:27:34,284 INFO conf.Configuration: resource-types.xml not found
+2021-04-24 17:27:34,284 INFO resource.ResourceUtils: Unable to find 'resource-types.xml'.
+2021-04-24 17:27:34,339 INFO impl.YarnClientImpl: Submitted application application_1619247045455_0003
+2021-04-24 17:27:34,370 INFO mapreduce.Job: The url to track the job: http://amber-VivoBook-ASUSLaptop-X430FA-S430FA:8088/proxy/application_1619247045455_0003/
+2021-04-24 17:27:34,371 INFO mapreduce.Job: Running job: job_1619247045455_0003
+2021-04-24 17:27:39,437 INFO mapreduce.Job: Job job_1619247045455_0003 running in uber mode : false
+2021-04-24 17:27:39,440 INFO mapreduce.Job:  map 0% reduce 0%
+2021-04-24 17:27:43,535 INFO mapreduce.Job:  map 100% reduce 0%
+2021-04-24 17:27:47,572 INFO mapreduce.Job:  map 100% reduce 100%
+2021-04-24 17:27:47,588 INFO mapreduce.Job: Job job_1619247045455_0003 completed successfully
+2021-04-24 17:27:47,668 INFO mapreduce.Job: Counters: 54
+	File System Counters
+		FILE: Number of bytes read=185
+		FILE: Number of bytes written=530401
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=203
+		HDFS: Number of bytes written=119
+		HDFS: Number of read operations=8
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+		HDFS: Number of bytes read erasure-coded=0
+	Job Counters 
+		Launched map tasks=1
+		Launched reduce tasks=1
+		Data-local map tasks=1
+		Total time spent by all maps in occupied slots (ms)=1635
+		Total time spent by all reduces in occupied slots (ms)=1672
+		Total time spent by all map tasks (ms)=1635
+		Total time spent by all reduce tasks (ms)=1672
+		Total vcore-milliseconds taken by all map tasks=1635
+		Total vcore-milliseconds taken by all reduce tasks=1672
+		Total megabyte-milliseconds taken by all map tasks=1674240
+		Total megabyte-milliseconds taken by all reduce tasks=1712128
+	Map-Reduce Framework
+		Map input records=10
+		Map output records=16
+		Map output bytes=157
+		Map output materialized bytes=185
+		Input split bytes=108
+		Combine input records=16
+		Combine output records=15
+		Reduce input groups=15
+		Reduce shuffle bytes=185
+		Reduce input records=15
+		Reduce output records=15
+		Spilled Records=30
+		Shuffled Maps =1
+		Failed Shuffles=0
+		Merged Map outputs=1
+		GC time elapsed (ms)=74
+		CPU time spent (ms)=900
+		Physical memory (bytes) snapshot=589602816
+		Virtual memory (bytes) snapshot=5174489088
+		Total committed heap usage (bytes)=483393536
+		Peak Map Physical memory (bytes)=349089792
+		Peak Map Virtual memory (bytes)=2584576000
+		Peak Reduce Physical memory (bytes)=240513024
+		Peak Reduce Virtual memory (bytes)=2589913088
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=95
+	File Output Format Counters 
+		Bytes Written=119
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ hdfs dfs -ls output1
+2021-04-24 17:28:12,250 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Found 2 items
+-rw-r--r--   1 hadoopusr supergroup          0 2021-04-24 17:27 output1/_SUCCESS
+-rw-r--r--   1 hadoopusr supergroup        119 2021-04-24 17:27 output1/part-r-00000
+hadoopusr@samir-VivoBook-ASUSLaptop-X430FA-S430FA:/usr/local/hadoop$ hdfs dfs -cat output1/part-r-00000
+2021-04-24 17:28:55,994 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+amber	1
+df	1
+dmsnd	1
+dndn	1
+fdf	1
+hadoop	1
+hello	1
+insnjdnsjad	1
+ipl	2
+ksmdknd	1
+njsdn	1
+nkndkw	1
+pkpkp	1
+s	1
+sdnjsd	1
